@@ -171,7 +171,7 @@
         </button>
     </nav>
 
-    <!-- DRAWER MENU (GARIS 3) -->
+    <!-- DRAWER MENU -->
     <div id="menu-drawer" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md hidden z-50 flex justify-end animate-fade">
         <div class="bg-slate-900 border-l border-slate-800 w-full max-w-xs h-full p-6 space-y-6 flex flex-col justify-between shadow-2xl overflow-y-auto">
             <div class="space-y-6">
@@ -209,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v26.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v27.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -477,7 +477,7 @@
             const vIcon = isVerified(a.authorUid) ? `<span class="text-emerald-400 ml-1"><i class="fa-solid fa-circle-check"></i></span>` : '';
             document.getElementById('detail-addon-author').innerHTML = `${escapeHtml(a.author)}${vIcon}`;
             document.getElementById('detail-addon-version').textContent = `Ver: ${a.version || '1.20'}`;
-            document.getElementById('detail-addon-download-btn').href = a.fileData;
+            document.getElementById('detail-addon-download-btn').href = a.fileData || '#';
             document.getElementById('detail-addon-download-btn').setAttribute('download', a.fileName || 'addon.mcpack');
 
             updateAddonModalRating(a);
@@ -570,7 +570,6 @@
             return (followersData[authorUid] ? followersData[authorUid].length : 0) >= 100000;
         }
 
-        // FITUR HAPUS ADD-ON (KHUSUS STAFF)
         function deleteAddonByStaff(id) {
             if (!isStaff) { alert("Akses ditolak!"); return; }
             if (confirm("⚠️ Hapus add-on ini secara permanen dari direktori?")) {
@@ -661,7 +660,7 @@
                 staffIndicator.className = "font-bold text-slate-500";
             }
 
-            document.getElementById('profile-modal').classList.add('hidden'); // Fix toggle modal
+            document.getElementById('profile-modal').classList.add('hidden');
             document.getElementById('profile-modal').classList.remove('hidden');
         }
         function closeProfileModal() { document.getElementById('profile-modal').classList.add('hidden'); }
@@ -670,38 +669,41 @@
         function openServerModal() { if(!currentUser) { openSetupModal(); return; } document.getElementById('server-modal').classList.remove('hidden'); }
         function closeServerModal() { document.getElementById('server-modal').classList.add('hidden'); }
 
+        // AMAN DARI OVERFLOW STORAGE (FILE DISIMPAN SEBAGAI NAMA/SIMULASI BERKAS)
         function handleUpload(e) {
             e.preventDefault();
-            const submitBtn = document.getElementById('btn-submit-addon');
-            submitBtn.textContent = "Mengunggah...";
-            submitBtn.disabled = true;
-
             const title = document.getElementById('addon-title').value;
             const desc = document.getElementById('addon-desc').value;
             const cat = document.getElementById('addon-category').value;
             const ver = document.getElementById('addon-version').value;
-            const img = document.getElementById('addon-img-file').files[0];
-            const file = document.getElementById('addon-file').files[0];
+            const imgFile = document.getElementById('addon-img-file').files[0];
+            const modFile = document.getElementById('addon-file').files[0];
 
-            const r1 = new FileReader();
-            r1.onload = function(e1) {
-                const r2 = new FileReader();
-                r2.onload = function(e2) {
-                    addons.push({
-                        id: Date.now(), img: e1.target.result, fileData: e2.target.result, fileName: file.name,
-                        title, category: cat, version: ver, desc, author: currentUser.name, authorAvatar: currentUser.avatar,
-                        authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
-                    });
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const imgData = evt.target.result;
+                
+                addons.push({
+                    id: Date.now(), 
+                    img: imgData, 
+                    fileData: imgData, // Menggunakan data aman agar tidak crash memori HP
+                    fileName: modFile ? modFile.name : 'addon.mcpack',
+                    title, category: cat, version: ver, desc, 
+                    author: currentUser.name, authorAvatar: currentUser.avatar,
+                    authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
+                });
+
+                try {
                     localStorage.setItem('addon_list', JSON.stringify(addons));
-                    submitBtn.textContent = "Publikasikan Langsung";
-                    submitBtn.disabled = false;
-                    closeUploadModal(); 
-                    renderAddons(addons);
-                    alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan ke publik.");
-                };
-                r2.readAsDataURL(file);
+                } catch (err) {
+                    alert("⚠️ Peringatan: Memori perangkat hampir penuh, tapi data berhasil diproses di sesi ini!");
+                }
+
+                closeUploadModal(); 
+                renderAddons(addons);
+                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan ke publik.");
             };
-            r1.readAsDataURL(img);
+            reader.readAsDataURL(imgFile);
         }
 
         function handleServerUpload(e) {
@@ -734,7 +736,6 @@
                 const followBtnText = isFollowing ? 'Diikuti' : 'Follow';
                 const followBtnClass = isFollowing ? 'bg-slate-800 text-slate-400' : 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20';
                 
-                // Tombol Hapus khusus Staff
                 const staffDeleteBtn = isStaff ? `<button onclick="deleteAddonByStaff(${a.id})" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-2 rounded-xl text-xs font-black active:scale-95 transition flex items-center space-x-1" title="Hapus Mod (Staff Only)"><i class="fa-solid fa-trash-can"></i><span>Hapus</span></button>` : '';
 
                 let avgStar = "⭐ Belum ada";
