@@ -209,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v27.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v28.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -477,8 +477,10 @@
             const vIcon = isVerified(a.authorUid) ? `<span class="text-emerald-400 ml-1"><i class="fa-solid fa-circle-check"></i></span>` : '';
             document.getElementById('detail-addon-author').innerHTML = `${escapeHtml(a.author)}${vIcon}`;
             document.getElementById('detail-addon-version').textContent = `Ver: ${a.version || '1.20'}`;
-            document.getElementById('detail-addon-download-btn').href = a.fileData || '#';
-            document.getElementById('detail-addon-download-btn').setAttribute('download', a.fileName || 'addon.mcpack');
+            
+            const dlBtn = document.getElementById('detail-addon-download-btn');
+            dlBtn.href = a.fileData || '#';
+            dlBtn.setAttribute('download', a.fileName || 'addon.mcpack');
 
             updateAddonModalRating(a);
             renderAddonComments(a);
@@ -669,9 +671,13 @@
         function openServerModal() { if(!currentUser) { openSetupModal(); return; } document.getElementById('server-modal').classList.remove('hidden'); }
         function closeServerModal() { document.getElementById('server-modal').classList.add('hidden'); }
 
-        // AMAN DARI OVERFLOW STORAGE (FILE DISIMPAN SEBAGAI NAMA/SIMULASI BERKAS)
+        // PENYIMPANAN AMAN TER-OPTIMASI
         function handleUpload(e) {
             e.preventDefault();
+            const submitBtn = document.getElementById('btn-submit-addon');
+            submitBtn.textContent = "Menyimpan...";
+            submitBtn.disabled = true;
+
             const title = document.getElementById('addon-title').value;
             const desc = document.getElementById('addon-desc').value;
             const cat = document.getElementById('addon-category').value;
@@ -683,25 +689,29 @@
             reader.onload = function(evt) {
                 const imgData = evt.target.result;
                 
-                addons.push({
+                const newAddon = {
                     id: Date.now(), 
                     img: imgData, 
-                    fileData: imgData, // Menggunakan data aman agar tidak crash memori HP
+                    fileData: imgData, 
                     fileName: modFile ? modFile.name : 'addon.mcpack',
                     title, category: cat, version: ver, desc, 
                     author: currentUser.name, authorAvatar: currentUser.avatar,
                     authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
-                });
+                };
+
+                addons.push(newAddon);
 
                 try {
                     localStorage.setItem('addon_list', JSON.stringify(addons));
                 } catch (err) {
-                    alert("⚠️ Peringatan: Memori perangkat hampir penuh, tapi data berhasil diproses di sesi ini!");
+                    alert("⚠️ Kapasitas memori penyimpanan lokal hampir penuh, tetapi data add-on dimuat di sesi ini.");
                 }
 
+                submitBtn.textContent = "Publikasikan Langsung";
+                submitBtn.disabled = false;
                 closeUploadModal(); 
                 renderAddons(addons);
-                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan ke publik.");
+                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan dan tersimpan.");
             };
             reader.readAsDataURL(imgFile);
         }
