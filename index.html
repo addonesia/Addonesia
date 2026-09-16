@@ -209,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v28.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v30.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -234,7 +234,7 @@
                     <p class="text-xs text-slate-300 leading-relaxed" id="detail-addon-desc">Deskripsi...</p>
                     <div class="flex items-center justify-between text-[11px] text-slate-400 pt-2 border-t border-slate-800">
                         <span>Oleh: <b id="detail-addon-author" class="text-slate-200">Kreator</b></span>
-                        <span id="detail-addon-version" class="text-indigo-400 font-mono font-bold">Ver: 1.20</span>
+                        <span id="detail-addon-version" class="text-indigo-400 font-mono font-bold">Ver: 1.21.4</span>
                     </div>
                 </div>
 
@@ -265,8 +265,8 @@
             </div>
 
             <div class="pt-3 border-t border-slate-800 flex justify-end">
-                <a id="detail-addon-download-btn" href="#" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3 rounded-2xl transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2 active:scale-95">
-                    <i class="fa-solid fa-download"></i><span>Unduh Berkas Add-on</span>
+                <a id="detail-addon-download-btn" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3 rounded-2xl transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2 active:scale-95">
+                    <i class="fa-solid fa-download"></i><span>Unduh Berkas Add-on (Link Eksternal)</span>
                 </a>
             </div>
         </div>
@@ -281,7 +281,7 @@
             </div>
             <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
                 <p><b>Addonesia</b> adalah platform direktori mod, add-on, dan server Minecraft publik terbesar di Indonesia.</p>
-                <p><b>🚀 Direct Upload:</b> Setiap add-on yang diunggah langsung tayang secara instan untuk bisa dinikmati komunitas.</p>
+                <p><b>🚀 Versi Bebas Custom:</b> Kreator dapat memasukkan nomor versi Minecraft apa saja secara manual.</p>
             </div>
             <button onclick="closeAboutModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-2xl text-xs transition active:scale-95">Mengerti & Tutup</button>
         </div>
@@ -353,25 +353,25 @@
             </div>
             <form onsubmit="handleUpload(event)" class="space-y-3.5">
                 <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Foto Cover</label>
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Foto Cover / Thumbnail</label>
                     <input type="file" id="addon-img-file" accept="image/*" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-1 text-xs text-slate-300">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">File Add-on (.mcpack / .zip)</label>
-                    <input type="file" id="addon-file" accept=".mcpack, .mcworld, .zip, .rar" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-1 text-xs text-slate-300">
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Link Download File (Google Drive / MediaFire)</label>
+                    <input type="url" id="addon-file-link" required placeholder="https://mediafire.com/file/..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Judul Add-on</label>
-                    <input type="text" id="addon-title" required placeholder="Realistic Physics" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Judul Add-on / Mod / Shader / Map</label>
+                    <input type="text" id="addon-title" required placeholder="Contoh: Shaders v1.21.11" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
-                    <select id="addon-category" onchange="updateVersionOptions()" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100">
+                    <select id="addon-category" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100">
                         <option value="MCPE">MCPE (Bedrock)</option>
                         <option value="Java">Java Mod</option>
                         <option value="Shader">Shader</option>
                         <option value="Map">Map</option>
                     </select>
-                    <select id="addon-version" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100"></select>
+                    <input type="text" id="addon-version" required placeholder="Versi (cth: 1.21.11)" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
                 </div>
                 <textarea id="addon-desc" rows="3" required placeholder="Deskripsi fitur..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none"></textarea>
                 <button type="submit" id="btn-submit-addon" class="w-full bg-emerald-500 text-slate-950 font-black py-3 rounded-xl text-xs active:scale-95 transition">Publikasikan Langsung</button>
@@ -419,7 +419,6 @@
         updateAuthUI();
         renderAddons(addons);
         renderServers(servers);
-        updateVersionOptions();
 
         function openMenuDrawer() { document.getElementById('menu-drawer').classList.remove('hidden'); }
         function closeMenuDrawer() { document.getElementById('menu-drawer').classList.add('hidden'); }
@@ -454,15 +453,6 @@
             renderAddons(addons);
         }
 
-        function updateVersionOptions() {
-            const cat = document.getElementById('addon-category').value;
-            const select = document.getElementById('addon-version');
-            if (!select) return;
-            select.innerHTML = '';
-            let versions = (cat === 'Java') ? ["26.2.2", "1.21.4", "1.20.4", "1.19.4", "1.16.5", "1.12.2", "1.8.9"] : ["1.26", "1.21", "1.20", "1.19", "1.18", "1.17", "1.16"];
-            versions.forEach(v => { select.innerHTML += `<option value="${v}">${v}</option>`; });
-        }
-
         // DETAIL ADD-ON
         function openAddonDetailModal(id) {
             currentOpenAddonId = id;
@@ -476,11 +466,10 @@
             
             const vIcon = isVerified(a.authorUid) ? `<span class="text-emerald-400 ml-1"><i class="fa-solid fa-circle-check"></i></span>` : '';
             document.getElementById('detail-addon-author').innerHTML = `${escapeHtml(a.author)}${vIcon}`;
-            document.getElementById('detail-addon-version').textContent = `Ver: ${a.version || '1.20'}`;
+            document.getElementById('detail-addon-version').textContent = `Ver: ${escapeHtml(a.version || 'Universal')}`;
             
             const dlBtn = document.getElementById('detail-addon-download-btn');
-            dlBtn.href = a.fileData || '#';
-            dlBtn.setAttribute('download', a.fileName || 'addon.mcpack');
+            dlBtn.href = a.fileLink || '#';
 
             updateAddonModalRating(a);
             renderAddonComments(a);
@@ -671,7 +660,7 @@
         function openServerModal() { if(!currentUser) { openSetupModal(); return; } document.getElementById('server-modal').classList.remove('hidden'); }
         function closeServerModal() { document.getElementById('server-modal').classList.add('hidden'); }
 
-        // PENYIMPANAN AMAN TER-OPTIMASI
+        // UPLOAD DENGAN VERSI CUSTOM KETIK
         function handleUpload(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('btn-submit-addon');
@@ -682,8 +671,8 @@
             const desc = document.getElementById('addon-desc').value;
             const cat = document.getElementById('addon-category').value;
             const ver = document.getElementById('addon-version').value;
+            const fileLink = document.getElementById('addon-file-link').value;
             const imgFile = document.getElementById('addon-img-file').files[0];
-            const modFile = document.getElementById('addon-file').files[0];
 
             const reader = new FileReader();
             reader.onload = function(evt) {
@@ -692,26 +681,20 @@
                 const newAddon = {
                     id: Date.now(), 
                     img: imgData, 
-                    fileData: imgData, 
-                    fileName: modFile ? modFile.name : 'addon.mcpack',
+                    fileLink: fileLink, 
                     title, category: cat, version: ver, desc, 
                     author: currentUser.name, authorAvatar: currentUser.avatar,
                     authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
                 };
 
                 addons.push(newAddon);
-
-                try {
-                    localStorage.setItem('addon_list', JSON.stringify(addons));
-                } catch (err) {
-                    alert("⚠️ Kapasitas memori penyimpanan lokal hampir penuh, tetapi data add-on dimuat di sesi ini.");
-                }
+                localStorage.setItem('addon_list', JSON.stringify(addons));
 
                 submitBtn.textContent = "Publikasikan Langsung";
                 submitBtn.disabled = false;
                 closeUploadModal(); 
                 renderAddons(addons);
-                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan dan tersimpan.");
+                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan dengan versi custom.");
             };
             reader.readAsDataURL(imgFile);
         }
@@ -772,7 +755,7 @@
                                 <button onclick="toggleFollow('${a.authorUid}')" class="px-2.5 py-1 rounded-xl text-[10px] font-black transition active:scale-95 ${followBtnClass}">${followBtnText}</button>
                             </div>
                             <div class="flex justify-between items-center pt-1">
-                                <span class="text-[10px] font-mono text-indigo-400">Ver: ${a.version || '1.20'}</span>
+                                <span class="text-[10px] font-mono font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 px-2.5 py-1 rounded-xl">Ver: ${escapeHtml(a.version || 'Universal')}</span>
                                 <div class="flex space-x-2">
                                     ${staffDeleteBtn}
                                     <button onclick="openAddonDetailModal(${a.id})" class="bg-emerald-500 text-slate-950 font-black text-xs px-4 py-2 rounded-xl active:scale-95 transition">Lihat & Beri Ulasan</button>
