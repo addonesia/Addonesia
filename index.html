@@ -65,7 +65,7 @@
             </div>
             <div class="relative z-10 space-y-4 max-w-2xl">
                 <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-black px-3.5 py-1 rounded-full inline-flex items-center space-x-1.5">
-                    <i class="fa-solid fa-circle-check text-emerald-400"></i> <span>KURASI STAFF AKTIF (ANTI MOD NGAWUR)</span>
+                    <i class="fa-solid fa-circle-check text-emerald-400"></i> <span>DIREKTORI PUBLIK & MOD KOMUNITAS</span>
                 </span>
                 <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight">
                     Pusat Jaringan Kreator & Server Minecraft Terpercaya di Indonesia.
@@ -95,12 +95,12 @@
             <div class="space-y-4">
                 <div class="flex items-center justify-between px-2">
                     <h2 class="text-xs font-black text-slate-400 uppercase tracking-wider flex items-center space-x-2">
-                        <i class="fa-solid fa-layer-group text-emerald-400"></i><span>Direktori Add-on Terverifikasi</span>
+                        <i class="fa-solid fa-layer-group text-emerald-400"></i><span>Direktori Add-on Publik</span>
                     </h2>
                     <span id="total-addons" class="text-[10px] glass-panel px-3 py-1 rounded-xl text-emerald-400 font-bold border border-slate-800">0 Add-on</span>
                 </div>
                 <div id="addons-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="text-slate-500 text-xs italic glass-panel p-12 rounded-3xl text-center col-span-full shadow-inner">Belum ada add-on terverifikasi.</div>
+                    <div class="text-slate-500 text-xs italic glass-panel p-12 rounded-3xl text-center col-span-full shadow-inner">Belum ada add-on terpublikasi.</div>
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
             </div>
         </div>
 
-        <!-- SECTION 3: DIGITAL STORE (COMING SOON / MAINTENANCE STYLE) -->
+        <!-- SECTION 3: DIGITAL STORE -->
         <div id="section-digital" class="space-y-6 hidden">
             <div class="glass-panel rounded-3xl p-8 sm:p-16 text-center space-y-6 max-w-2xl mx-auto shadow-2xl border border-emerald-500/20 relative overflow-hidden">
                 <div class="absolute -right-16 -top-16 text-emerald-500/5 text-[12rem] font-black pointer-events-none">
@@ -199,9 +199,6 @@
                     <a href="https://discord.gg/gMfqtubvQ" target="_blank" class="w-full flex items-center space-x-3 bg-slate-950 hover:bg-slate-800 p-3 rounded-2xl text-xs font-bold text-slate-200 transition active:scale-95">
                         <i class="fa-brands fa-discord text-indigo-400 w-5"></i><span>Discord Komunitas</span>
                     </a>
-                    <button onclick="closeMenuDrawer(); openStaffReviewModal();" class="w-full flex items-center space-x-3 bg-slate-950 hover:bg-slate-800 p-3 rounded-2xl text-xs font-bold text-slate-200 transition active:scale-95">
-                        <i class="fa-solid fa-shield-halved text-indigo-400 w-5"></i><span>Panel Staff / Review</span>
-                    </button>
                     <button onclick="closeMenuDrawer(); exportData();" class="w-full flex items-center space-x-3 bg-slate-950 hover:bg-slate-800 p-3 rounded-2xl text-xs font-bold text-slate-200 transition active:scale-95">
                         <i class="fa-solid fa-cloud-arrow-down text-emerald-400 w-5"></i><span>Backup Data (.json)</span>
                     </button>
@@ -212,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v25.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v26.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -279,12 +276,12 @@
     <div id="about-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl animate-fade">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-black text-sm text-slate-100"><i class="fa-solid fa-shield-cat text-emerald-400 mr-2"></i>Tentang Addonesia & Keamanan</h3>
+                <h3 class="font-black text-sm text-slate-100"><i class="fa-solid fa-shield-cat text-emerald-400 mr-2"></i>Tentang Addonesia</h3>
                 <button onclick="closeAboutModal()" class="text-slate-400 hover:text-white text-sm active:scale-95"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
-                <p><b>Addonesia</b> adalah platform direktori mod, add-on, dan server Minecraft resmi terbesar di Indonesia.</p>
-                <p><b>🛡️ Jaminan Anti-Mod Ngawur:</b> Setiap add-on yang diunggah wajib melewati kurasi ketat Staff sebelum tayang ke publik.</p>
+                <p><b>Addonesia</b> adalah platform direktori mod, add-on, dan server Minecraft publik terbesar di Indonesia.</p>
+                <p><b>🚀 Direct Upload:</b> Setiap add-on yang diunggah langsung tayang secara instan untuk bisa dinikmati komunitas.</p>
             </div>
             <button onclick="closeAboutModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-2xl text-xs transition active:scale-95">Mengerti & Tutup</button>
         </div>
@@ -347,22 +344,6 @@
         </div>
     </div>
 
-    <!-- MODAL PANEL REVIEW STAFF -->
-    <div id="staff-review-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto animate-fade">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-black text-sm text-slate-100"><i class="fa-solid fa-shield-halved text-indigo-400 mr-2"></i>Panel Moderasi Staff</h3>
-                <button onclick="closeStaffReviewModal()" class="text-slate-400 hover:text-white text-sm active:scale-95"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div id="pending-addons-container" class="space-y-3 pt-2">
-                <div class="text-xs text-slate-500 italic text-center py-6">Tidak ada add-on menunggu review.</div>
-            </div>
-            <div class="pt-2 border-t border-slate-800">
-                <button onclick="logoutStaff()" class="w-full bg-red-500/10 text-red-400 border border-red-500/30 font-bold py-2.5 rounded-xl text-xs transition active:scale-95">Logout Sesi Staff</button>
-            </div>
-        </div>
-    </div>
-
     <!-- MODAL UPLOAD ADD-ON -->
     <div id="upload-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto animate-fade">
@@ -393,7 +374,7 @@
                     <select id="addon-version" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100"></select>
                 </div>
                 <textarea id="addon-desc" rows="3" required placeholder="Deskripsi fitur..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none"></textarea>
-                <button type="submit" id="btn-submit-addon" class="w-full bg-emerald-500 text-slate-950 font-black py-3 rounded-xl text-xs active:scale-95 transition">Kirim untuk Dicek Staff</button>
+                <button type="submit" id="btn-submit-addon" class="w-full bg-emerald-500 text-slate-950 font-black py-3 rounded-xl text-xs active:scale-95 transition">Publikasikan Langsung</button>
             </form>
         </div>
     </div>
@@ -457,8 +438,8 @@
                     if (pass === "admin123") {
                         isStaff = true;
                         localStorage.setItem('addonesia_is_staff', 'true');
-                        alert("🎉 Akses Staff Aktif!");
-                        openStaffReviewModal();
+                        alert("🎉 Akses Staff Aktif! Anda kini memiliki izin menghapus add-on.");
+                        renderAddons(addons);
                     } else if (pass !== null) {
                         alert("❌ Password Salah!");
                     }
@@ -469,8 +450,8 @@
         function logoutStaff() {
             isStaff = false;
             localStorage.setItem('addonesia_is_staff', 'false');
-            closeStaffReviewModal();
             alert("Berhasil keluar dari sesi Staff.");
+            renderAddons(addons);
         }
 
         function updateVersionOptions() {
@@ -589,52 +570,15 @@
             return (followersData[authorUid] ? followersData[authorUid].length : 0) >= 100000;
         }
 
-        function openStaffReviewModal() {
+        // FITUR HAPUS ADD-ON (KHUSUS STAFF)
+        function deleteAddonByStaff(id) {
             if (!isStaff) { alert("Akses ditolak!"); return; }
-            renderPendingAddons();
-            document.getElementById('staff-review-modal').classList.remove('hidden');
-        }
-        function closeStaffReviewModal() { document.getElementById('staff-review-modal').classList.add('hidden'); }
-
-        function renderPendingAddons() {
-            const container = document.getElementById('pending-addons-container');
-            const pending = addons.filter(i => i.status === 'pending');
-            if (pending.length === 0) { container.innerHTML = `<div class="text-xs text-slate-500 italic text-center py-6">Tidak ada add-on menunggu review.</div>`; return; }
-            container.innerHTML = '';
-            pending.forEach(a => {
-                container.innerHTML += `
-                    <div class="bg-slate-950 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <img src="${a.img}" class="w-10 h-10 rounded-xl object-cover">
-                            <div><h5 class="text-xs font-bold text-slate-100">${escapeHtml(a.title)}</h5><p class="text-[10px] text-slate-400">Oleh: ${escapeHtml(a.author)}</p></div>
-                        </div>
-                        <div class="space-x-1">
-                            <button onclick="approveAddon(${a.id})" class="bg-emerald-500 text-slate-950 px-2.5 py-1 rounded-xl text-[10px] font-black active:scale-95 transition">Setujui</button>
-                            <button onclick="rejectAddon(${a.id})" class="bg-red-500/10 text-red-400 px-2.5 py-1 rounded-xl text-[10px] font-bold active:scale-95 transition">Tolak</button>
-                        </div>
-                    </div>`;
-            });
-        }
-        
-        function approveAddon(id) {
-            addons = addons.map(i => { 
-                if (i.id === id) {
-                    i.status = 'approved'; 
-                }
-                return i; 
-            });
-            localStorage.setItem('addon_list', JSON.stringify(addons));
-            renderPendingAddons(); 
-            renderAddons(addons); 
-            alert("✅ Add-on berhasil disetujui dan kini tayang di Home!");
-        }
-        
-        function rejectAddon(id) {
-            addons = addons.filter(i => i.id !== id);
-            localStorage.setItem('addon_list', JSON.stringify(addons));
-            renderPendingAddons(); 
-            renderAddons(addons); 
-            alert("❌ Add-on ditolak dan dihapus.");
+            if (confirm("⚠️ Hapus add-on ini secara permanen dari direktori?")) {
+                addons = addons.filter(item => item.id !== id);
+                localStorage.setItem('addon_list', JSON.stringify(addons));
+                renderAddons(addons);
+                alert("Add-on berhasil dihapus oleh Staff.");
+            }
         }
 
         function exportData() {
@@ -717,6 +661,7 @@
                 staffIndicator.className = "font-bold text-slate-500";
             }
 
+            document.getElementById('profile-modal').classList.add('hidden'); // Fix toggle modal
             document.getElementById('profile-modal').classList.remove('hidden');
         }
         function closeProfileModal() { document.getElementById('profile-modal').classList.add('hidden'); }
@@ -728,7 +673,7 @@
         function handleUpload(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('btn-submit-addon');
-            submitBtn.textContent = "Sedang Mengirim...";
+            submitBtn.textContent = "Mengunggah...";
             submitBtn.disabled = true;
 
             const title = document.getElementById('addon-title').value;
@@ -745,13 +690,14 @@
                     addons.push({
                         id: Date.now(), img: e1.target.result, fileData: e2.target.result, fileName: file.name,
                         title, category: cat, version: ver, desc, author: currentUser.name, authorAvatar: currentUser.avatar,
-                        authorUid: currentUser.uid, status: 'pending', ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
+                        authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
                     });
                     localStorage.setItem('addon_list', JSON.stringify(addons));
-                    submitBtn.textContent = "Kirim untuk Dicek Staff";
+                    submitBtn.textContent = "Publikasikan Langsung";
                     submitBtn.disabled = false;
                     closeUploadModal(); 
-                    alert("🚀 Berhasil! Add-on telah masuk ke antrean kurasi Staff. Silakan cek lewat Panel Staff.");
+                    renderAddons(addons);
+                    alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan ke publik.");
                 };
                 r2.readAsDataURL(file);
             };
@@ -778,17 +724,19 @@
         function renderAddons(list) {
             const grid = document.getElementById('addons-grid');
             const total = document.getElementById('total-addons');
-            const approved = list.filter(i => i.status === 'approved');
-            total.textContent = `${approved.length} Add-on`;
+            total.textContent = `${list.length} Add-on`;
 
-            if (approved.length === 0) { grid.innerHTML = `<div class="text-slate-500 text-xs italic glass-panel p-12 rounded-3xl text-center col-span-full">Tidak ada add-on terverifikasi.</div>`; return; }
+            if (list.length === 0) { grid.innerHTML = `<div class="text-slate-500 text-xs italic glass-panel p-12 rounded-3xl text-center col-span-full">Tidak ada add-on terpublikasi.</div>`; return; }
             grid.innerHTML = '';
-            approved.slice().reverse().forEach(a => {
+            list.slice().reverse().forEach(a => {
                 const verifiedIcon = isVerified(a.authorUid) ? `<span class="text-emerald-400 text-xs ml-1"><i class="fa-solid fa-circle-check"></i></span>` : '';
                 const isFollowing = currentUser && followersData[a.authorUid] && followersData[a.authorUid].includes(currentUser.uid);
                 const followBtnText = isFollowing ? 'Diikuti' : 'Follow';
                 const followBtnClass = isFollowing ? 'bg-slate-800 text-slate-400' : 'bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20';
                 
+                // Tombol Hapus khusus Staff
+                const staffDeleteBtn = isStaff ? `<button onclick="deleteAddonByStaff(${a.id})" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-3 py-2 rounded-xl text-xs font-black active:scale-95 transition flex items-center space-x-1" title="Hapus Mod (Staff Only)"><i class="fa-solid fa-trash-can"></i><span>Hapus</span></button>` : '';
+
                 let avgStar = "⭐ Belum ada";
                 if (a.ratingsMap && Object.keys(a.ratingsMap).length > 0) {
                     const sc = Object.values(a.ratingsMap);
@@ -814,10 +762,13 @@
                             </div>
                             <div class="flex justify-between items-center pt-1">
                                 <span class="text-[10px] font-mono text-indigo-400">Ver: ${a.version || '1.20'}</span>
-                                <button onclick="openAddonDetailModal(${a.id})" class="bg-emerald-500 text-slate-950 font-black text-xs px-4 py-2 rounded-xl active:scale-95 transition">Lihat & Beri Ulasan</button>
+                                <div class="flex space-x-2">
+                                    ${staffDeleteBtn}
+                                    <button onclick="openAddonDetailModal(${a.id})" class="bg-emerald-500 text-slate-950 font-black text-xs px-4 py-2 rounded-xl active:scale-95 transition">Lihat & Beri Ulasan</button>
+                                </div>
                             </div>
                         </div>
-                    `;
+                    </div>`;
             });
         }
 
