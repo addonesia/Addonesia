@@ -30,10 +30,10 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-32 selection:bg-emerald-500 selection:text-slate-950">
 
-    <!-- Header Atas -->
+    <!-- Header Atas (Logo diketuk 5x untuk akses rahasia staff) -->
     <header class="glass-panel border-b border-slate-800/80 p-4 sticky top-0 z-40 shadow-2xl transition-all">
         <div class="container mx-auto flex justify-between items-center max-w-7xl px-4 sm:px-6">
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 cursor-pointer select-none" onclick="secretStaffTrigger()">
                 <div class="bg-gradient-to-br from-emerald-500 to-teal-600 p-2.5 rounded-2xl shadow-lg shadow-emerald-500/20">
                     <i class="fa-solid fa-cubes text-slate-950 text-xl animate-pulse"></i>
                 </div>
@@ -70,7 +70,7 @@
                     Pusat Jaringan Kreator & Server Minecraft Terpercaya di Indonesia.
                 </h1>
                 <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Unduh add-on berkualitas tinggi, jelajahi server komunitas resmi, dan temukan produk digital eksklusif.
+                    Unduh add-on berkualitas tinggi dan jelajahi server komunitas resmi dalam satu platform terpadu.
                 </p>
             </div>
         </div>
@@ -121,24 +121,33 @@
             </div>
         </div>
 
-        <!-- SECTION 3: DIGITAL STORE -->
+        <!-- SECTION 3: DIGITAL STORE (COMING SOON / MAINTENANCE STYLE) -->
         <div id="section-digital" class="space-y-6 hidden">
-            <div class="space-y-4 flex flex-col items-center">
-                <div class="w-full flex items-center justify-between px-2 max-w-7xl">
-                    <h2 class="text-xs font-black text-slate-400 uppercase tracking-wider flex items-center space-x-2">
-                        <i class="fa-solid fa-box-open text-emerald-400"></i><span>Katalog Produk Digital & Jasa Addonesia</span>
-                    </h2>
-                    <div id="staff-product-action-container"></div>
+            <div class="glass-panel rounded-3xl p-8 sm:p-16 text-center space-y-6 max-w-2xl mx-auto shadow-2xl border border-emerald-500/20 relative overflow-hidden">
+                <div class="absolute -right-16 -top-16 text-emerald-500/5 text-[12rem] font-black pointer-events-none">
+                    <i class="fa-solid fa-store"></i>
                 </div>
-                <div id="digital-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-2">
-                    <!-- Produk terisi dinamis -->
+                <div class="inline-flex items-center justify-center bg-emerald-500/10 border border-emerald-500/30 w-20 h-20 rounded-3xl shadow-xl animate-pulse mx-auto text-emerald-400 text-3xl">
+                    <i class="fa-solid fa-person-digging"></i>
+                </div>
+                <div class="space-y-2">
+                    <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-black px-3.5 py-1 rounded-full uppercase tracking-widest">Maintenance & Development</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Addonesia Store Segera Hadir!</h2>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-md mx-auto">
+                        Kami sedang mempersiapkan sistem transaksi otomatis, katalog item digital eksklusif, dan layanan setup server profesional terbaik untuk kalian.
+                    </p>
+                </div>
+                <div class="pt-2">
+                    <a href="https://discord.gg/gMfqtubvQ" target="_blank" class="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white font-black px-6 py-3.5 rounded-2xl text-xs transition shadow-lg shadow-indigo-600/30">
+                        <i class="fa-brands fa-discord text-base"></i><span>Gabung Discord untuk Info Update</span>
+                    </a>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- NAVBAR BAWAH (BARU SESUAI REQUEST) -->
+    <!-- NAVBAR BAWAH -->
     <nav class="fixed bottom-0 left-0 right-0 glass-panel border-t border-slate-800 px-4 sm:px-8 py-3.5 z-30 flex justify-between items-center max-w-xl mx-auto rounded-t-3xl shadow-2xl">
         <button onclick="switchTab('addons'); window.scrollTo({top: 0, behavior: 'smooth'})" id="nav-btn-addons" class="flex flex-col items-center text-emerald-400 space-y-1 transition transform active:scale-95 group">
             <i class="fa-solid fa-house text-lg group-hover:scale-110 transition"></i>
@@ -181,7 +190,7 @@
                         <i class="fa-solid fa-server text-emerald-400 w-5"></i><span>Jaringan Server</span>
                     </button>
                     <button onclick="closeMenuDrawer(); switchTab('digital')" class="w-full flex items-center space-x-3 bg-slate-950 hover:bg-slate-800 p-3 rounded-2xl text-xs font-bold text-slate-200 transition">
-                        <i class="fa-solid fa-box-open text-emerald-400 w-5"></i><span>Produk Digital & Store</span>
+                        <i class="fa-solid fa-box-open text-emerald-400 w-5"></i><span>Produk (Coming Soon)</span>
                     </button>
                     <button onclick="closeMenuDrawer(); openAboutModal();" class="w-full flex items-center space-x-3 bg-slate-950 hover:bg-slate-800 p-3 rounded-2xl text-xs font-bold text-slate-200 transition">
                         <i class="fa-solid fa-circle-info text-emerald-400 w-5"></i><span>Tentang Kami & Jaminan</span>
@@ -202,7 +211,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v22.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v24.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -244,7 +253,7 @@
                 <div class="space-y-3 pt-2">
                     <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-wider">Komentar & Diskusi Mod</h4>
                     <form onsubmit="postAddonComment(event)" class="space-y-2">
-                        <input type="text" id="addon-comment-text" required placeholder="Tulis komentar atau pertanyaan..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-100 outline-none focus:border-emerald-500">
+                        <input type="text" id="addon-comment-text" required placeholder="Tulis komentar..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-100 outline-none focus:border-emerald-500">
                         <button type="submit" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-xs transition">Kirim Komentar</button>
                     </form>
                     <div id="detail-addon-comments-list" class="space-y-2 max-h-40 overflow-y-auto pr-1">
@@ -276,35 +285,6 @@
         </div>
     </div>
 
-    <!-- MODAL UPLOAD PRODUK DIGITAL (KHUSUS STAFF) -->
-    <div id="digital-upload-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl animate-fade">
-            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                <h3 class="font-black text-sm text-slate-100"><i class="fa-solid fa-box text-emerald-400 mr-2"></i>Tambah Produk Digital Store</h3>
-                <button onclick="closeDigitalUploadModal()" class="text-slate-400 hover:text-white text-sm"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <form onsubmit="handleDigitalProductUpload(event)" class="space-y-3.5">
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Nama Produk / Jasa</label>
-                    <input type="text" id="dig-title" required placeholder="Paket Setup Plugin" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Kategori Label</label>
-                    <input type="text" id="dig-cat" required placeholder="JASA SETUP" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Harga</label>
-                    <input type="text" id="dig-price" required placeholder="Rp 25.000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Deskripsi Produk</label>
-                    <textarea id="dig-desc" rows="3" required placeholder="Penjelasan..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-emerald-500 text-slate-950 font-black py-3 rounded-xl text-xs">Publikasikan ke Store</button>
-            </form>
-        </div>
-    </div>
-
     <!-- MODAL BUAT PROFIL -->
     <div id="setup-profile-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-sm rounded-3xl p-6 space-y-5 shadow-2xl animate-fade">
@@ -330,7 +310,7 @@
         </div>
     </div>
 
-    <!-- MODAL PROFIL & STAFF LOGIN -->
+    <!-- MODAL PROFIL BERSIH -->
     <div id="profile-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-sm rounded-3xl p-6 space-y-5 shadow-2xl max-h-[90vh] overflow-y-auto animate-fade">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -354,13 +334,10 @@
                 <i class="fa-solid fa-pen-to-square mr-1.5"></i> Edit Profil
             </button>
 
-            <!-- TOMBOL LOGIN STAFF -->
-            <div class="bg-slate-950 border border-indigo-500/40 p-4 rounded-2xl space-y-2">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-indigo-400">Akses Staff / Owner</span>
-                    <span id="modal-staff-status" class="text-[9px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold">Locked</span>
-                </div>
-                <button onclick="toggleStaffAccess()" id="btn-staff-login-modal" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2 rounded-xl text-xs transition">Login Staff (admin123)</button>
+            <!-- Indikator Status Staff -->
+            <div class="bg-slate-950 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between text-xs">
+                <span class="text-slate-400 font-semibold">Status Hak Akses:</span>
+                <span id="modal-staff-indicator" class="font-bold text-slate-500">Regular Member</span>
             </div>
         </div>
     </div>
@@ -375,10 +352,13 @@
             <div id="pending-addons-container" class="space-y-3 pt-2">
                 <div class="text-xs text-slate-500 italic text-center py-6">Tidak ada add-on menunggu review.</div>
             </div>
+            <div class="pt-2 border-t border-slate-800">
+                <button onclick="logoutStaff()" class="w-full bg-red-500/10 text-red-400 border border-red-500/30 font-bold py-2.5 rounded-xl text-xs transition">Logout Sesi Staff</button>
+            </div>
         </div>
     </div>
 
-    <!-- MODAL UPLOAD ADD-ON (VERSI DIPERBARUI LENGKAP) -->
+    <!-- MODAL UPLOAD ADD-ON -->
     <div id="upload-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
         <div class="glass-panel w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto animate-fade">
             <div class="flex justify-between items-center border-b border-slate-800 pb-3">
@@ -405,10 +385,7 @@
                         <option value="Shader">Shader</option>
                         <option value="Map">Map</option>
                     </select>
-                    <!-- VERSI SPESIFIK AKURAT -->
-                    <select id="addon-version" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100">
-                        <!-- Terisi otomatis oleh JS -->
-                    </select>
+                    <select id="addon-version" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100"></select>
                 </div>
                 <textarea id="addon-desc" rows="3" required placeholder="Deskripsi fitur..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none"></textarea>
                 <button type="submit" class="w-full bg-emerald-500 text-slate-950 font-black py-3 rounded-xl text-xs">Kirim untuk Dicek Staff</button>
@@ -441,14 +418,11 @@
         let currentUser = JSON.parse(localStorage.getItem('addonesia_current_user')) || null;
         let addons = JSON.parse(localStorage.getItem('addon_list')) || [];
         let servers = JSON.parse(localStorage.getItem('server_list')) || [];
-        let digitalProducts = JSON.parse(localStorage.getItem('addonesia_digital_products')) || [
-            { id: 1, title: 'Paket Setup Survival Full Plugin', category: 'JASA SETUP', price: 'Rp 25.000', desc: 'Jasa pembuatan server Minecraft siap pakai lengkap dengan sistem rank & anti-cheat.' },
-            { id: 2, title: 'Discord Server Template Gaming', category: 'TEMPLATE', price: 'Rp 10.000', desc: 'Template server Discord siap pakai dengan channel rapi dan role otomatis.' }
-        ];
         let followersData = JSON.parse(localStorage.getItem('addonesia_followers')) || {};
         let isStaff = localStorage.getItem('addonesia_is_staff') === 'true';
         let currentFilter = 'Semua';
         let currentOpenAddonId = null;
+        let secretClicks = 0;
 
         let myDeviceId = localStorage.getItem('addonesia_device_id');
         if (!myDeviceId) {
@@ -459,8 +433,6 @@
         updateAuthUI();
         renderAddons(addons);
         renderServers(servers);
-        renderDigitalProducts();
-        updateStaffProductButton();
         updateVersionOptions();
 
         function openMenuDrawer() { document.getElementById('menu-drawer').classList.remove('hidden'); }
@@ -468,93 +440,41 @@
         function openAboutModal() { document.getElementById('about-modal').classList.remove('hidden'); }
         function closeAboutModal() { document.getElementById('about-modal').classList.add('hidden'); }
 
-        // VERSI MINECRAFT REAL SPESIFIK
+        // AKSES RAHASIA STAFF (KETUK LOGO 5 KALI DI HEADER)
+        function secretStaffTrigger() {
+            secretClicks++;
+            if (secretClicks >= 5) {
+                secretClicks = 0;
+                if (isStaff) {
+                    if (confirm("Logout dari sesi Staff?")) { logoutStaff(); }
+                } else {
+                    const pass = prompt("🔐 Masukkan Password Rahasia Staff:");
+                    if (pass === "admin123") {
+                        isStaff = true;
+                        localStorage.setItem('addonesia_is_staff', 'true');
+                        alert("🎉 Akses Staff Aktif!");
+                        openStaffReviewModal();
+                    } else if (pass !== null) {
+                        alert("❌ Password Salah!");
+                    }
+                }
+            }
+        }
+
+        function logoutStaff() {
+            isStaff = false;
+            localStorage.setItem('addonesia_is_staff', 'false');
+            closeStaffReviewModal();
+            alert("Berhasil keluar dari sesi Staff.");
+        }
+
         function updateVersionOptions() {
             const cat = document.getElementById('addon-category').value;
             const select = document.getElementById('addon-version');
             if (!select) return;
             select.innerHTML = '';
-            
-            let versions = [];
-            if (cat === 'Java') {
-                versions = ["26.2.2", "1.21.4", "1.20.4", "1.19.4", "1.16.5", "1.12.2", "1.8.9"];
-            } else {
-                versions = ["1.26", "1.21", "1.20", "1.19", "1.18", "1.17", "1.16"];
-            }
+            let versions = (cat === 'Java') ? ["26.2.2", "1.21.4", "1.20.4", "1.19.4", "1.16.5", "1.12.2", "1.8.9"] : ["1.26", "1.21", "1.20", "1.19", "1.18", "1.17", "1.16"];
             versions.forEach(v => { select.innerHTML += `<option value="${v}">${v}</option>`; });
-        }
-
-        function buyDigitalProduct(name, price) {
-            window.open(`https://discord.gg/gMfqtubvQ`, '_blank');
-        }
-
-        function openDigitalUploadModal() {
-            if (!isStaff) { alert("Akses ditolak! Hanya Staff/Owner yang dapat mengunggah produk digital."); return; }
-            document.getElementById('digital-upload-modal').classList.remove('hidden');
-        }
-        function closeDigitalUploadModal() { document.getElementById('digital-upload-modal').classList.add('hidden'); }
-
-        function handleDigitalProductUpload(e) {
-            e.preventDefault();
-            if (!isStaff) return;
-            digitalProducts.push({
-                id: Date.now(),
-                title: document.getElementById('dig-title').value,
-                category: document.getElementById('dig-cat').value,
-                price: document.getElementById('dig-price').value,
-                desc: document.getElementById('dig-desc').value
-            });
-            localStorage.setItem('addonesia_digital_products', JSON.stringify(digitalProducts));
-            closeDigitalUploadModal();
-            renderDigitalProducts();
-            alert("Produk berhasil ditambahkan!");
-        }
-
-        function renderDigitalProducts() {
-            const grid = document.getElementById('digital-products-grid');
-            if (!grid) return;
-            if (digitalProducts.length === 0) {
-                grid.innerHTML = `<div class="text-slate-500 text-xs italic glass-panel p-12 rounded-3xl text-center col-span-full">Belum ada produk digital.</div>`;
-                return;
-            }
-            grid.innerHTML = '';
-            digitalProducts.slice().reverse().forEach(p => {
-                const deleteBtn = isStaff ? `<button onclick="deleteDigitalProduct(${p.id})" class="text-red-400 bg-red-500/10 px-2 py-1 rounded-lg text-[10px] font-bold mt-2">Hapus Produk</button>` : '';
-                grid.innerHTML += `
-                    <div class="glass-panel rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between">
-                        <div class="p-5.5 space-y-3">
-                            <div class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-black px-3 py-1 rounded-xl inline-block">${escapeHtml(p.category)}</div>
-                            <h3 class="font-black text-base text-slate-100">${escapeHtml(p.title)}</h3>
-                            <p class="text-xs text-slate-400 leading-relaxed">${escapeHtml(p.desc)}</p>
-                            <div class="text-emerald-400 font-black text-sm pt-2">${escapeHtml(p.price)}</div>
-                            ${deleteBtn}
-                        </div>
-                        <div class="p-5.5 pt-0">
-                            <button onclick="buyDigitalProduct()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-3 rounded-2xl text-xs transition shadow-lg flex items-center justify-center space-x-1.5">
-                                <i class="fa-brands fa-discord"></i><span>Order via Discord</span>
-                            </button>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function deleteDigitalProduct(id) {
-            if (!isStaff) return;
-            if (confirm("Hapus produk ini?")) {
-                digitalProducts = digitalProducts.filter(p => p.id !== id);
-                localStorage.setItem('addonesia_digital_products', JSON.stringify(digitalProducts));
-                renderDigitalProducts();
-            }
-        }
-
-        function updateStaffProductButton() {
-            const container = document.getElementById('staff-product-action-container');
-            if (!container) return;
-            if (isStaff) {
-                container.innerHTML = `<button onclick="openDigitalUploadModal()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-[10px] px-3.5 py-1.5 rounded-xl shadow">+ Tambah Produk</button>`;
-            } else {
-                container.innerHTML = ``;
-            }
         }
 
         // DETAIL ADD-ON
@@ -659,29 +579,13 @@
             renderAddons(addons);
         }
 
-        // BADGE STAFF OTOMATIS DI SEMUA BAGIAN
         function isVerified(authorUid) {
             if (isStaff && currentUser && currentUser.uid === authorUid) return true;
             return (followersData[authorUid] ? followersData[authorUid].length : 0) >= 100000;
         }
 
-        function toggleStaffAccess() {
-            if (isStaff) {
-                if (confirm("Logout Staff?")) {
-                    isStaff = false; localStorage.setItem('addonesia_is_staff', 'false');
-                    updateStaffProductButton(); openProfileModal(); alert("Logout sukses.");
-                }
-            } else {
-                const pass = prompt("Password Staff:");
-                if (pass === "admin123") {
-                    isStaff = true; localStorage.setItem('addonesia_is_staff', 'true');
-                    updateStaffProductButton(); openProfileModal(); alert("Login Staff Berhasil!"); openStaffReviewModal();
-                } else if (pass !== null) { alert("Salah!"); }
-            }
-        }
-
         function openStaffReviewModal() {
-            if (!isStaff) { toggleStaffAccess(); return; }
+            if (!isStaff) { alert("Akses ditolak!"); return; }
             renderPendingAddons();
             document.getElementById('staff-review-modal').classList.remove('hidden');
         }
@@ -690,7 +594,7 @@
         function renderPendingAddons() {
             const container = document.getElementById('pending-addons-container');
             const pending = addons.filter(i => i.status === 'pending');
-            if (pending.length === 0) { container.innerHTML = `<div class="text-xs text-slate-500 italic text-center py-6">Tidak ada add-on pending.</div>`; return; }
+            if (pending.length === 0) { container.innerHTML = `<div class="text-xs text-slate-500 italic text-center py-6">Tidak ada add-on menunggu review.</div>`; return; }
             container.innerHTML = '';
             pending.forEach(a => {
                 container.innerHTML += `
@@ -718,7 +622,7 @@
         }
 
         function exportData() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({currentUser, addons, servers, followersData, digitalProducts}, null, 2));
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({currentUser, addons, servers, followersData}, null, 2));
             const dl = document.createElement('a'); dl.setAttribute("href", dataStr); dl.setAttribute("download", `addonesia_backup_${Date.now()}.json`);
             document.body.appendChild(dl); dl.click(); dl.remove(); alert("Backup didownload!");
         }
@@ -788,18 +692,13 @@
             const badge = document.getElementById('modal-verified-badge');
             if (isVerified(currentUser.uid)) badge.classList.remove('hidden'); else badge.classList.add('hidden');
 
-            const statusBadge = document.getElementById('modal-staff-status');
-            const staffBtn = document.getElementById('btn-staff-login-modal');
+            const staffIndicator = document.getElementById('modal-staff-indicator');
             if (isStaff) {
-                statusBadge.className = "text-[9px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold";
-                statusBadge.textContent = "Active (Staff)";
-                staffBtn.textContent = "Logout Staff";
-                staffBtn.className = "w-full bg-red-600 hover:bg-red-500 text-white font-black py-2 rounded-xl text-xs transition";
+                staffIndicator.textContent = "Authorized Staff / Owner";
+                staffIndicator.className = "font-bold text-emerald-400";
             } else {
-                statusBadge.className = "text-[9px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-bold";
-                statusBadge.textContent = "Locked";
-                staffBtn.textContent = "Login Staff (admin123)";
-                staffBtn.className = "w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2 rounded-xl text-xs transition";
+                staffIndicator.textContent = "Regular Member";
+                staffIndicator.className = "font-bold text-slate-500";
             }
 
             document.getElementById('profile-modal').classList.remove('hidden');
