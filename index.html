@@ -209,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v32.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v33.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -265,9 +265,9 @@
             </div>
 
             <div class="pt-3 border-t border-slate-800 flex justify-end">
-                <a id="detail-addon-download-btn" href="#" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3 rounded-2xl transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2 active:scale-95">
+                <button id="detail-addon-download-btn" onclick="downloadCurrentAddonFile()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3 rounded-2xl transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2 active:scale-95 cursor-pointer">
                     <i class="fa-solid fa-download"></i><span>Unduh Berkas Add-on</span>
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -281,7 +281,7 @@
             </div>
             <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
                 <p><b>Addonesia</b> adalah platform direktori mod, add-on, dan server Minecraft publik terbesar di Indonesia.</p>
-                <p><b>🚀 Direct File Upload:</b> Unggah file berkas asli secara langsung dengan versi custom sesukamu.</p>
+                <p><b>🚀 Direct File Upload:</b> 100% menggunakan file lokal fisik asli tanpa link eksternal.</p>
             </div>
             <button onclick="closeAboutModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-2xl text-xs transition active:scale-95">Mengerti & Tutup</button>
         </div>
@@ -468,16 +468,28 @@
             const vIcon = isVerified(a.authorUid) ? `<span class="text-emerald-400 ml-1"><i class="fa-solid fa-circle-check"></i></span>` : '';
             document.getElementById('detail-addon-author').innerHTML = `${escapeHtml(a.author)}${vIcon}`;
             document.getElementById('detail-addon-version').textContent = `Ver: ${escapeHtml(a.version || 'Universal')}`;
-            
-            const dlBtn = document.getElementById('detail-addon-download-btn');
-            dlBtn.href = a.fileData || '#';
-            dlBtn.setAttribute('download', a.fileName || 'addon.mcpack');
 
             updateAddonModalRating(a);
             renderAddonComments(a);
             document.getElementById('addon-detail-modal').classList.remove('hidden');
         }
         function closeAddonDetailModal() { document.getElementById('addon-detail-modal').classList.add('hidden'); }
+
+        // FUNGSI DOWNLOAD BERKAS LOKAL ASLI
+        function downloadCurrentAddonFile() {
+            const a = addons.find(item => item.id === currentOpenAddonId);
+            if (!a || !a.fileData) {
+                alert("❌ Maaf, berkas file tidak ditemukan.");
+                return;
+            }
+
+            const downloadLink = document.createElement('a');
+            downloadLink.href = a.fileData;
+            downloadLink.download = a.fileName || 'addon.mcpack';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
 
         function updateAddonModalRating(a) {
             let avgText = "⭐ Belum ada rating";
@@ -662,7 +674,7 @@
         function openServerModal() { if(!currentUser) { openSetupModal(); return; } document.getElementById('server-modal').classList.remove('hidden'); }
         function closeServerModal() { document.getElementById('server-modal').classList.add('hidden'); }
 
-        // UPLOAD FILE LOKAL LANGSUNG (DIOPTIMASI AGAR AMAN)
+        // UPLOAD FILE LOKAL LANGSUNG (DIOPTIMASI)
         function handleUpload(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('btn-submit-addon');
@@ -699,14 +711,14 @@
                     try {
                         localStorage.setItem('addon_list', JSON.stringify(addons));
                     } catch (err) {
-                        alert("⚠️ Perhatian: Ukuran file terlalu besar untuk memori lokal browser. Disarankan menggunakan file berukuran kecil/sedang agar aman setelah di-refresh.");
+                        alert("⚠️ Perhatian: Ukuran file terlalu besar untuk memori lokal browser. Disarankan menggunakan file berukuran kecil/sedang agar aman.");
                     }
 
                     submitBtn.textContent = "Publikasikan Langsung";
                     submitBtn.disabled = false;
                     closeUploadModal(); 
                     renderAddons(addons);
-                    alert("🚀 Berhasil! Berkas add-on langsung dipublikasikan.");
+                    alert("🚀 Berhasil! Berkas file add-on langsung dipublikasikan.");
                 };
                 readerMod.readAsDataURL(modFile);
             };
@@ -756,7 +768,7 @@
                         <div class="relative bg-slate-950 flex justify-center max-h-60 overflow-hidden cursor-pointer" onclick="openAddonDetailModal(${a.id})">
                             <img src="${a.img}" class="w-full object-contain max-h-60">
                             <span class="absolute top-3 left-3 text-[10px] bg-slate-950/90 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-xl font-black">${a.category}</span>
-                            <span class="absolute top-3 right-3 text-[10px] bg-slate-950/90 text-amber-400 border border-amber-500/30 px-3 py-1 rounded-xl font-black">${avgStar}</span>
+                            <span class="absolute top-3 right-3 text-[10px] bg-slate-950/90 text-amber-400 border border-emerald-500/30 px-3 py-1 rounded-xl font-black">${avgStar}</span>
                         </div>
                         <div class="p-5 space-y-4">
                             <h3 class="font-black text-sm text-slate-100 cursor-pointer hover:text-emerald-400 transition" onclick="openAddonDetailModal(${a.id})">${escapeHtml(a.title)}</h3>
