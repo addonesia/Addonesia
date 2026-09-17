@@ -209,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v31.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v32.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -265,8 +265,8 @@
             </div>
 
             <div class="pt-3 border-t border-slate-800 flex justify-end">
-                <a id="detail-addon-download-btn" href="#" target="_blank" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3 rounded-2xl transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2 active:scale-95">
-                    <i class="fa-solid fa-download"></i><span>Unduh Berkas Add-on (Link Eksternal)</span>
+                <a id="detail-addon-download-btn" href="#" download class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs px-6 py-3 rounded-2xl transition shadow-lg shadow-emerald-500/20 flex items-center space-x-2 active:scale-95">
+                    <i class="fa-solid fa-download"></i><span>Unduh Berkas Add-on</span>
                 </a>
             </div>
         </div>
@@ -281,7 +281,7 @@
             </div>
             <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
                 <p><b>Addonesia</b> adalah platform direktori mod, add-on, dan server Minecraft publik terbesar di Indonesia.</p>
-                <p><b>🚀 Versi Bebas Custom:</b> Kreator dapat memasukkan nomor versi Minecraft apa saja secara manual.</p>
+                <p><b>🚀 Direct File Upload:</b> Unggah file berkas asli secara langsung dengan versi custom sesukamu.</p>
             </div>
             <button onclick="closeAboutModal()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black py-3 rounded-2xl text-xs transition active:scale-95">Mengerti & Tutup</button>
         </div>
@@ -357,12 +357,12 @@
                     <input type="file" id="addon-img-file" accept="image/*" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-1 text-xs text-slate-300">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Link Download File (Google Drive / MediaFire)</label>
-                    <input type="url" id="addon-file-link" required placeholder="https://mediafire.com/file/..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
+                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">File Berkas (.mcpack / .zip / .rar)</label>
+                    <input type="file" id="addon-file" accept=".mcpack, .mcworld, .zip, .rar" required class="w-full bg-slate-950 border border-slate-800 rounded-xl p-1 text-xs text-slate-300">
                 </div>
                 <div>
                     <label class="block text-[10px] font-black uppercase text-slate-400 mb-1">Judul Add-on / Mod / Shader / Map</label>
-                    <input type="text" id="addon-title" required placeholder="Contoh: Shaders v1.21.11" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
+                    <input type="text" id="addon-title" required placeholder="Contoh: Shaders Ultra" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <select id="addon-category" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100">
@@ -371,7 +371,7 @@
                         <option value="Shader">Shader</option>
                         <option value="Map">Map</option>
                     </select>
-                    <!-- KOTAK INPUT VERSI BEBAS (CUSTOM) -->
+                    <!-- KOTAK INPUT VERSI KETIK MANUAL -->
                     <input type="text" id="addon-version" required placeholder="Versi (cth: 1.21.11)" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
                 </div>
                 <textarea id="addon-desc" rows="3" required placeholder="Deskripsi fitur..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none"></textarea>
@@ -470,7 +470,8 @@
             document.getElementById('detail-addon-version').textContent = `Ver: ${escapeHtml(a.version || 'Universal')}`;
             
             const dlBtn = document.getElementById('detail-addon-download-btn');
-            dlBtn.href = a.fileLink || '#';
+            dlBtn.href = a.fileData || '#';
+            dlBtn.setAttribute('download', a.fileName || 'addon.mcpack');
 
             updateAddonModalRating(a);
             renderAddonComments(a);
@@ -661,43 +662,55 @@
         function openServerModal() { if(!currentUser) { openSetupModal(); return; } document.getElementById('server-modal').classList.remove('hidden'); }
         function closeServerModal() { document.getElementById('server-modal').classList.add('hidden'); }
 
-        // UPLOAD DENGAN VERSI KETIK MANUAL
+        // UPLOAD FILE LOKAL LANGSUNG (DIOPTIMASI AGAR AMAN)
         function handleUpload(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('btn-submit-addon');
-            submitBtn.textContent = "Menyimpan...";
+            submitBtn.textContent = "Mengunggah File...";
             submitBtn.disabled = true;
 
             const title = document.getElementById('addon-title').value;
             const desc = document.getElementById('addon-desc').value;
             const cat = document.getElementById('addon-category').value;
             const ver = document.getElementById('addon-version').value;
-            const fileLink = document.getElementById('addon-file-link').value;
             const imgFile = document.getElementById('addon-img-file').files[0];
+            const modFile = document.getElementById('addon-file').files[0];
 
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                const imgData = evt.target.result;
+            const readerImg = new FileReader();
+            readerImg.onload = function(eImg) {
+                const imgData = eImg.target.result;
                 
-                const newAddon = {
-                    id: Date.now(), 
-                    img: imgData, 
-                    fileLink: fileLink, 
-                    title, category: cat, version: ver, desc, 
-                    author: currentUser.name, authorAvatar: currentUser.avatar,
-                    authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
+                const readerMod = new FileReader();
+                readerMod.onload = function(eMod) {
+                    const modData = eMod.target.result;
+
+                    const newAddon = {
+                        id: Date.now(), 
+                        img: imgData, 
+                        fileData: modData, 
+                        fileName: modFile ? modFile.name : 'addon.mcpack',
+                        title, category: cat, version: ver, desc, 
+                        author: currentUser.name, authorAvatar: currentUser.avatar,
+                        authorUid: currentUser.uid, ratingsMap: {}, comments: [], date: new Date().toLocaleDateString('id-ID')
+                    };
+
+                    addons.push(newAddon);
+                    
+                    try {
+                        localStorage.setItem('addon_list', JSON.stringify(addons));
+                    } catch (err) {
+                        alert("⚠️ Perhatian: Ukuran file terlalu besar untuk memori lokal browser. Disarankan menggunakan file berukuran kecil/sedang agar aman setelah di-refresh.");
+                    }
+
+                    submitBtn.textContent = "Publikasikan Langsung";
+                    submitBtn.disabled = false;
+                    closeUploadModal(); 
+                    renderAddons(addons);
+                    alert("🚀 Berhasil! Berkas add-on langsung dipublikasikan.");
                 };
-
-                addons.push(newAddon);
-                localStorage.setItem('addon_list', JSON.stringify(addons));
-
-                submitBtn.textContent = "Publikasikan Langsung";
-                submitBtn.disabled = false;
-                closeUploadModal(); 
-                renderAddons(addons);
-                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan.");
+                readerMod.readAsDataURL(modFile);
             };
-            reader.readAsDataURL(imgFile);
+            readerImg.readAsDataURL(imgFile);
         }
 
         function handleServerUpload(e) {
