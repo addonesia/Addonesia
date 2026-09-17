@@ -209,7 +209,7 @@
                 <button onclick="resetAccountData()" class="w-full bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-2xl text-xs transition flex items-center justify-center space-x-2 active:scale-95">
                     <i class="fa-solid fa-user-xmark"></i><span>Hapus Akun / Reset Data</span>
                 </button>
-                <p class="text-[9px] text-slate-500 text-center">Addonesia v30.0 &bull; Secure Ecosystem</p>
+                <p class="text-[9px] text-slate-500 text-center">Addonesia v31.0 &bull; Secure Ecosystem</p>
             </div>
         </div>
     </div>
@@ -371,6 +371,7 @@
                         <option value="Shader">Shader</option>
                         <option value="Map">Map</option>
                     </select>
+                    <!-- KOTAK INPUT VERSI BEBAS (CUSTOM) -->
                     <input type="text" id="addon-version" required placeholder="Versi (cth: 1.21.11)" class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none">
                 </div>
                 <textarea id="addon-desc" rows="3" required placeholder="Deskripsi fitur..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-xs text-slate-100 outline-none"></textarea>
@@ -660,7 +661,7 @@
         function openServerModal() { if(!currentUser) { openSetupModal(); return; } document.getElementById('server-modal').classList.remove('hidden'); }
         function closeServerModal() { document.getElementById('server-modal').classList.add('hidden'); }
 
-        // UPLOAD DENGAN VERSI CUSTOM KETIK
+        // UPLOAD DENGAN VERSI KETIK MANUAL
         function handleUpload(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('btn-submit-addon');
@@ -694,7 +695,7 @@
                 submitBtn.disabled = false;
                 closeUploadModal(); 
                 renderAddons(addons);
-                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan dengan versi custom.");
+                alert("🚀 Berhasil! Add-on Anda langsung dipublikasikan.");
             };
             reader.readAsDataURL(imgFile);
         }
